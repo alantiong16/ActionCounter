@@ -79,7 +79,8 @@ class KinectLib:
         
         pykinect.initialize_libraries(track_body=True)
         device_config = pykinect.default_configuration
-        device_config.color_resolution = pykinect.K4A_COLOR_RESOLUTION_OFF
+        # device_config.color_resolution = pykinect.K4A_COLOR_RESOLUTION_OFF
+        device_config.color_resolution = pykinect.K4A_COLOR_RESOLUTION_1080P
         device_config.depth_mode = pykinect.K4A_DEPTH_MODE_WFOV_2X2BINNED
        
         self.device = pykinect.start_device(config=device_config)
@@ -186,14 +187,17 @@ if __name__ == '__main__':
                 # Get the colored body segmentation
                 ret_color, body_image_color = body_frame.get_segmentation_image()
 
+                ret, color_image = capture.get_color_image()
+                combined_image = body_frame.draw_bodies(color_image, pykinect.K4A_CALIBRATION_TYPE_COLOR)
+                # cv2.imshow('rgb',color_skeleton)
                 if not ret_depth or not ret_color:
                     continue
                 
                 # Combine both images
-                combined_image = cv2.addWeighted(depth_color_image, 0.6, body_image_color, 0.4, 0)
-
+                # combined_image = cv2.addWeighted(depth_color_image, 0.6, body_image_color, 0.4, 0)
+                
                 # Draw the skeletons
-                combined_image = body_frame.draw_bodies(combined_image)
+                # combined_image = body_frame.draw_bodies(combined_image)
                 # Overlay FPS on the image
                 cv2.putText(combined_image, f'FPS: {int(fps)}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
                 # Overlay body segmentation on depth image
