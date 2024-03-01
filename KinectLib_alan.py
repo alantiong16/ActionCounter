@@ -278,31 +278,31 @@ if __name__ == '__main__':
                     # Update last_time for the next iteration
                     last_time = current_time
                     cv2.imshow('Depth image with skeleton',combined_image)
-                with Timer('plotting'):
-                    if frame_number % update_interval == 0:
-                       # Update subplot lines
-                        line_elbow.set_xdata(frame_numbers)
-                        line_elbow.set_ydata(rknee_angles)
+                # with Timer('plotting'):
+                #     if frame_number % update_interval == 0:
+                #        # Update subplot lines
+                #         line_elbow.set_xdata(frame_numbers)
+                #         line_elbow.set_ydata(rknee_angles)
 
-                        line_knee.set_xdata(frame_numbers)
-                        line_knee.set_ydata(relbow_angles)
+                #         line_knee.set_xdata(frame_numbers)
+                #         line_knee.set_ydata(relbow_angles)
 
-                        line_knee.set_xdata(frame_numbers)
-                        line_knee.set_ydata(rshoulder_angles)
+                #         line_knee.set_xdata(frame_numbers)
+                #         line_knee.set_ydata(rshoulder_angles)
 
-                        # Set plot limits (optional)
-                        ax_elbow.set_xlim(min(frame_numbers), max(frame_numbers))
-                        ax_elbow.set_ylim(0, 180)
+                #         # Set plot limits (optional)
+                #         ax_elbow.set_xlim(min(frame_numbers), max(frame_numbers))
+                #         ax_elbow.set_ylim(0, 180)
 
 
 
-                        # Redraw the plot
-                        fig.canvas.draw()
-                        fig.canvas.flush_events()
+                #         # Redraw the plot
+                #         fig.canvas.draw()
+                #         fig.canvas.flush_events()
 
-                    frame_number += 1
+                #     frame_number += 1
                     
-                    plt.pause(0.01)  
+                #     plt.pause(0.01)  
                 
                 # Press q key to stop
                 if cv2.waitKey(1) == ord('q'):  
