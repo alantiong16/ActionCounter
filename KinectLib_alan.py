@@ -281,7 +281,10 @@ if __name__ == '__main__':
                     frame_numbers.append(frame_number) 
                     # Update last_time for the next iteration
                     last_time = current_time
-                    cv2.imshow('Depth image with skeleton',combined_image)
+                    if combined_image is not None and combined_image.shape[0] > 0 and combined_image.shape[1] > 0:
+                        cv2.imshow('Depth image with skeleton', combined_image)
+                    else:
+                        print("Combined image is None or has zero width or height. Skipping imshow.")
                 # with Timer('plotting'):
                 #     if frame_number % update_interval == 0:
                 #        # Update subplot lines
